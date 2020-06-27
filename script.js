@@ -71,6 +71,18 @@ function generatePassword() {
   } else {
     alert("Lowercase letters will not be included.");
   }
+  var isUpper = confirm("Would you like uppercase letters?");
+  if (isUpper === true) {
+    alert("Uppercase letters will be included.");
+  } else {
+    alert("Uppercase letters will not be included.");
+  }
+  var isSpecial = confirm("Would you like special characters?");
+  if (isSpecial === true) {
+    alert("Special characters will be included.");
+  } else {
+    alert("Special characters will not be included.");
+  }
 }
 
 // Write password to the #password input
