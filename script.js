@@ -81,11 +81,14 @@ function generatePassword() {
     alert("Special characters will not be included.");
   }
   var passwordLength = prompt(
-    // Look for solution to entering non numeric characters
     // Look for solution to clicking "cancel"
     "How long would you like your password to be?\nPlease enter a number between 8 and 128"
   );
-  while (passwordLength < 8 || passwordLength > 128) {
+  while (
+    passwordLength < 8 ||
+    passwordLength > 128 ||
+    typeof passwordLength !== "string"
+  ) {
     alert("Please enter a number between 8 and 128");
     passwordLength = prompt(
       "How long would you like your password to be?\nPlease enter a number between 8 and 128"
