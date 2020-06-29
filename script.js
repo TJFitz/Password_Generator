@@ -57,10 +57,11 @@ function generatePassword() {
     }
   }
   var passwordLengthString = prompt(
-    // Look for solution to clicking "cancel"
     "How long would you like your password to be?\nPlease enter a number between 8 and 128"
   );
-
+  if (passwordLengthString === null) {
+    return;
+  }
   var passwordLength = parseInt(passwordLengthString);
   passwordNaN = isNaN(passwordLength);
   while (passwordLength < 8 || passwordLength > 128 || passwordNaN === true) {
@@ -70,6 +71,9 @@ function generatePassword() {
     );
     passwordLength = parseInt(passwordLengthString);
     passwordNaN = isNaN(passwordLength);
+    if (passwordLengthString === null) {
+      return;
+    }
   }
   alert("Password length will be " + passwordLength + " characters long.");
   // Logic for generating password
