@@ -13,6 +13,9 @@ var scrambledPass = [];
 var scrambledString = [];
 var finalPass = "";
 var i = 0;
+var beepBoop = false;
+var creatingPass = 0;
+var beepBoopFunction;
 
 // Function for creating password
 function generatePassword() {
@@ -78,7 +81,8 @@ function generatePassword() {
     }
   }
   alert("Password length will be " + passwordLength + " characters long.");
-  // Logic for generating password
+  // Logic for generating password based on user input above
+
   // Logic for adding included characters to the password generating array
   if (isLower === true) {
     arrayArr.push(lowercase);
@@ -105,7 +109,7 @@ function generatePassword() {
       iterateArrayArr();
     }
   }
-  // Function to shuffle preScramble array
+  // Function to randomize the preScramble array
   function shuffle(array) {
     for (var a = 0; a < array.length; a) {
       var r = Math.floor(Math.random() * array.length);
@@ -114,15 +118,35 @@ function generatePassword() {
     }
     return scrambledPass;
   }
-  // Creation of final password
 
+  beepBoopFunction = setInterval(beepSwitch, 1000);
+
+  // Creation of final password
   createPreScramble();
   scrambledPass = shuffle(preScramble);
   finalPass = scrambledPass.join("");
   return finalPass;
 }
-//  ------------------ end --------------------
+//  ------------------ end of main function --------------------
 
+// Function to show cool text to the user before displaying password, proving that this took a lot of work
+function beepSwitch() {
+  if (beepBoop === false) {
+    beepText = document.querySelector("#password");
+    beepText.value = "Beep Boop\nPlease Wait";
+    beepBoop = true;
+  } else {
+    createText = document.querySelector("#password");
+    createText.value = "Generating your secure password\nPlease Wait";
+    beepBoop = false;
+    creatingPass++;
+  }
+  if (creatingPass > 1) {
+    clearInterval(beepBoopFunction);
+  }
+}
+
+// Function to reset necessary arrays and variables before creating a new password - This prevents previous callings of the function from adding their values to the last and displaying improperly
 function resetPass() {
   arrayArr = [];
   preScramble = [];
@@ -130,6 +154,8 @@ function resetPass() {
   scrambledString = [];
   finalPass = "";
   i = 0;
+  beepBoop = false;
+  creatingPass = 0;
 }
 // Write password to the #password input
 function writePassword() {
