@@ -8,15 +8,17 @@ var upperString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var uppercase = upperString.split("");
 var specialChar = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "="];
 var arrayArr = [];
-var i = 0;
 var preScramble = [];
 var scrambledPass = [];
 var scrambledString = [];
-finalPass = "";
+var finalPass = "";
+var i = 0;
 
-// Creating password function
+// Function for creating password
 function generatePassword() {
+  resetPass();
   // Logic for taking user input\
+
   var isLower = confirm("Would you like lowercase letters?");
   if (isLower === true) {
     alert("Lowercase letters will be included.");
@@ -64,7 +66,7 @@ function generatePassword() {
   }
   var passwordLength = parseInt(passwordLengthString);
   passwordNaN = isNaN(passwordLength);
-  while (passwordLength < 8 || passwordLength > 128 || passwordNaN === true) {
+  while (passwordLength < 8 || passwordLength > 128 || passwordNaN) {
     alert("Please enter a number between 8 and 128");
     passwordLengthString = prompt(
       "How long would you like your password to be?\nPlease enter a number between 8 and 128"
@@ -77,6 +79,7 @@ function generatePassword() {
   }
   alert("Password length will be " + passwordLength + " characters long.");
   // Logic for generating password
+  // Logic for adding included characters to the password generating array
   if (isLower === true) {
     arrayArr.push(lowercase);
   }
@@ -111,35 +114,30 @@ function generatePassword() {
     }
     return scrambledPass;
   }
+  // Creation of final password
+
   createPreScramble();
   scrambledPass = shuffle(preScramble);
   finalPass = scrambledPass.join("");
   return finalPass;
 }
+//  ------------------ end --------------------
 
+function resetPass() {
+  arrayArr = [];
+  preScramble = [];
+  scrambledPass = [];
+  scrambledString = [];
+  finalPass = "";
+  i = 0;
+}
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
+  passwordText.value = "";
   passwordText.value = password;
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-// arrayArr[Math.floor(Math.random() * arrayArr.length)][Math.floor(Math.random() * )]
-
-// Do all of this an amount of times equal to passwordLength
-
-// Iterate through array of arrays
-// On each iteration, randomly access a character in current array and set to a variable
-// Add random character variable to prescramble
-//
-
-// for (var i = 0; i < passwordLength; i++) {
-//   var a;
-//   currentArr = arrayArr[a];
-//   var randomChar = currentArr[Math.floor(Math.random() * currentArr.length)];
-//   a++;
-//   preScramble.push(randomChar);
-// }
